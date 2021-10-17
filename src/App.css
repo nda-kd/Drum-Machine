@@ -1,38 +1,151 @@
+/* html {
+  
+}
+
+html[data_theme="light"] {
+ 
+} */
+
 .App {
+  white-space: nowrap;
+  overflow-x: hidden;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  background-color: #eeecec;
 }
 
-.App-link {
-  color: #61dafb;
+.cube {
+  display: block;
+  position: relative;
+  height: 60%;
+  width: calc(100% / 12);
+  margin: auto 5px 0 0;
+  transform-style: preserve-3d;
+  border-right: 1px solid transparent;
+  background-color: #c9c9c9;
+}
+.cube:nth-of-type(1) {
+  -webkit-animation: flow 1500ms 0.125s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 0.125s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 0.125s ease-in-out infinite alternate;
+  animation: flow 1500ms 0.125s ease-in-out infinite alternate;
+  /* background-color: rgb(241, 52, 19); */
+}
+.cube:nth-of-type(2) {
+  -webkit-animation: flow 1500ms 0.25s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 0.25s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 0.25s ease-in-out infinite alternate;
+  animation: flow 1500ms 0.25s ease-in-out infinite alternate;
+  /* background-color: rgb(241, 189, 19); */
+}
+.cube:nth-of-type(3) {
+  -webkit-animation: flow 1500ms 0.375s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 0.375s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 0.375s ease-in-out infinite alternate;
+  animation: flow 1500ms 0.375s ease-in-out infinite alternate;
+  /* background-color: rgb(241, 226, 19); */
+}
+.cube:nth-of-type(4) {
+  -webkit-animation: flow 1500ms 0.5s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 0.5s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 0.5s ease-in-out infinite alternate;
+  animation: flow 1500ms 0.5s ease-in-out infinite alternate;
+  /* background-color: rgb(163, 241, 19); */
+}
+.cube:nth-of-type(5) {
+  -webkit-animation: flow 1500ms 0.625s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 0.625s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 0.625s ease-in-out infinite alternate;
+  animation: flow 1500ms 0.625s ease-in-out infinite alternate;
+  /* background-color: rgb(82, 241, 19); */
+}
+.cube:nth-of-type(6) {
+  -webkit-animation: flow 1500ms 0.75s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 0.75s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 0.75s ease-in-out infinite alternate;
+  animation: flow 1500ms 0.75s ease-in-out infinite alternate;
+  /* background-color: rgb(19, 241, 174); */
+}
+.cube:nth-of-type(7) {
+  -webkit-animation: flow 1500ms 0.875s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 0.875s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 0.875s ease-in-out infinite alternate;
+  animation: flow 1500ms 0.875s ease-in-out infinite alternate;
+  /* background-color: rgb(19, 226, 241); */
+}
+.cube:nth-of-type(8) {
+  -webkit-animation: flow 1500ms 1s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 1s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 1s ease-in-out infinite alternate;
+  animation: flow 1500ms 1s ease-in-out infinite alternate;
+  /* background-color: rgb(19, 160, 241); */
+}
+.cube:nth-of-type(9) {
+  -webkit-animation: flow 1500ms 1.125s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 1.125s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 1.125s ease-in-out infinite alternate;
+  animation: flow 1500ms 1.125s ease-in-out infinite alternate;
+  /* background-color: rgb(23, 19, 241); */
+}
+.cube:nth-of-type(10) {
+  -webkit-animation: flow 1500ms 1.25s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 1.25s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 1.25s ease-in-out infinite alternate;
+  animation: flow 1500ms 1.25s ease-in-out infinite alternate;
+  /* background-color: rgb(78, 19, 241); */
+}
+.cube:nth-of-type(11) {
+  -webkit-animation: flow 1500ms 1.375s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 1.375s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 1.375s ease-in-out infinite alternate;
+  animation: flow 1500ms 1.375s ease-in-out infinite alternate;
+  /* background-color: rgb(134, 19, 241); */
+}
+.cube:nth-of-type(12) {
+  -webkit-animation: flow 1500ms 1.5s ease-in-out infinite alternate;
+  -moz-animation: flow 1500ms 1.5s ease-in-out infinite alternate;
+  -o-animation: flow 1500ms 1.5s ease-in-out infinite alternate;
+  animation: flow 1500ms 1.5s ease-in-out infinite alternate;
+  /* background-color: rgb(215, 19, 241); */
+}
+.cube:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(228, 224, 224);
+  border-right: 1px solid rgb(100, 100, 100);
+  transform-origin: right top;
+  transform: rotateX(-90deg);
 }
 
-@keyframes App-logo-spin {
+@keyframes flow {
   from {
-    transform: rotate(0deg);
+    border-color: #222;
+    -webkit-transform: rotateX(0deg) translateY(0px) perspective(850px);
+    -moz-transform: rotateX(0deg) translateY(0px) perspective(850px);
+    transform: rotateX(0deg) translateY(0px) perspective(850px);
   }
   to {
-    transform: rotate(360deg);
+    border-color: transparent;
+    -webkit-transform: rotateX(-10deg) translateY(85%) perspective(0px);
+    -moz-transform: rotateX(-10deg) translateY(85%) perspective(0px);
+    transform: rotateX(-10deg) translateY(85%) perspective(0px);
   }
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0px -100px 75px -25px rgba(255, 0, 157, 0.125);
+  overflow: hidden;
 }

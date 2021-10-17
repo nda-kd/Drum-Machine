@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="CodePen" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico"
+    />
+
+    <link
+      rel="mask-icon"
+      type="image/x-icon"
+      href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+      color="#111"
+    />
+
+    <title>CodePen - toggle material</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
+
+    <style>
+            .toggle-wrapper {
+              position: absolute;
+            }
+
+            .rect_2 {
+              position: absolute;
+              left: 2px;
+              top: 3.3px;
+              width: 127px;
+              height: 37px;
+              background-image: linear-gradient(
+                to right,
+                #cbcbcb 0%,
+                #cbcbcb 0%,
+                #cdcdcd 100%
+              );
+              border: 8px solid #e4e4e3;
+              border-radius: 54px;
+            }
+            .rect_3 {
+              position: absolute;
+              left: 11px;
+              top: 11px;
+              width: 125px;
+              height: 37px;
+              border-radius: 38px;
+              background-color: rgba(0, 0, 0, 0);
+              box-shadow: inset 0 5px 25px 0 rgba(0, 0, 0, 0.6);
+            }
+            .toggle_handler {
+              position: absolute;
+              left: 66px;
+              top: 9px;
+              width: 70px;
+              height: 39px;
+              background-image: linear-gradient(
+                to top,
+                #bfbfbe 0%,
+                #e1e2e1 64%,
+                #f3f3f3 77%,
+                #f3f3f3 100%,
+                #f3f3f3 100%
+              );
+              border-radius: 45px;
+              box-shadow: inset 0 0 7px rgba(255, 255, 255, 0.35),
+                0 10px 10px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.5);
+              transition: all 0.3s;
+              will-change: transform;
+            }
+            .toggle__ellips {
+              position: absolute;
+              right: 10px;
+              top: 8px;
+              width: 23px;
+              height: 23px;
+              border-radius: 50%;
+              background-image: linear-gradient(
+                to top,
+                #e1e2e1 0%,
+                #e1e2e1 0%,
+                #b6b8b3 100%,
+                #c1c1c1 100%
+              );
+            }
+            .toggle-wrapper.pushed .toggle_handler {
+              transform: translate3d(-80%, 0, 0);
+            }
+            .toggle-wrapper.pushed .rect_1__inset {
+              transform: translate3d(-62%, 0, 0) scale(1, 1);
+            }
+
+            .container {
+              display: flex;
+              width: 100%;
+              height: 100vh;
+              justify-content: center;
+              align-items: center;
+              background-color: #ebf3fa;
+              flex-direction: column;
+            }
+
+            .toggle {
+              margin-top: 3em;
+              width: 120px;
+              height: 60px;
+              font-size: 1em;
+              outline: none;
+              border: none;
+              background-color: #e3edf7;
+              border-radius: 7px;
+              box-shadow: 4px 2px 16px hsla(208, 30%, 64%, 48%), -4px -2px 16px #ffff;
+              font-family: "Khula", sans-serif;
+              font-weight: bold;
+              color: #31456a;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+            }
+
+            .on .toggleText {
+              color: #ee6754;
+              text-shadow: 0 0 0.2em #ee6754;
+            }
+            .switchArea {
+              width: 60px;
+              height: 45px;
+              border-radius: 8px;
+              box-shadow: inset 3px 3px 7px hsla(208, 30%, 64%, 48%),
+                inset -3px -3px 7px #ffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .switch {
+              width: 80%;
+              height: 80%;
+              border-radius: 8px;
+              position: relative;
+              overflow: hidden;
+              transform: perspective(100px) rotateY(-8deg);
+              transition: 100ms ease-in-out;
+              box-shadow: 3px 3px 3px hsla(208, 30%, 64%, 48%), -1px -1px 1px #fff7;
+            }
+
+            .on .switch {
+              transform: rotateY(9deg);
+              box-shadow: 2px 2px 2px hsla(208, 30%, 64%, 48%), -2px -2px 2px #fff7;
+            }
+
+            .switch::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 150%;
+              height: 100%;
+              border-radius: 8px;
+              background: radial-gradient(
+                circle,
+                rgba(238, 103, 84, 1) 0%,
+                rgba(181, 35, 15, 1) 100%
+              );
+              transform: translate(-30%);
+              transition: 100ms ease-in-out;
+            }
+
+            .on .switch::before {
+              transform: translate(0);
+            }
+
+            .lines {
+              position: absolute;
+              height: 80%;
+              width: 10%;
+              border-left: 1px solid #f43838;
+              border-right: 1px solid #f43838;
+              top: 10%;
+              left: 10%;
+              bottom: 0;
+            }
+
+            .lines::before {
+              content: "";
+              position: absolute;
+              height: 100%;
+              width: 100%;
+              border-left: 1px solid #f43838;
+              border-right: 1px solid #f43838;
+              top: 0%;
+              left: 15%;
+              bottom: 0;
+              opacity: 80%;
+            }
+
+            .on .lines {
+              left: 75%;
+            }
+
+
+
+      
+      /* .switch {
+        width: 150px;
+        height: 55px;
+        position: relative;
+        margin: 100px auto;
+      }
+      .switch input {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 10;
+        width: 150px;
+        height: 55px;
+        position: absolute;
+        cursor: pointer;
+        opacity:0;
+        display:block;
+      }
+      .switch:after{
+        content:"";
+        background: transparent;
+        width: 152px;
+        height: 57px;
+        position: absolute;
+        top:0px;
+        border-radius: 30px;
+        box-shadow:
+              inset 0 3px 8px 1px rgba(0,0,0,0.75),
+              inset 0 -1px 5px rgba(0,0,0,0.75),
+              -2px 1px 3px rgba(255,255,255,0.08),
+              2px -1px 3px rgba(255,255,255,0.08);
+      }
+      .switch label {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #1F2736; #121823
+          background: linear-gradient(#121823, #161d2b);
+        border-radius: 30px;
+        box-shadow:
+              inset 0 3px 8px 1px rgba(0,0,0,0.5),
+              inset 0 1px 0 rgba(0,0,0,0.5),
+              0 1px 0 rgba(255,255,255,0.2);
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+        border:1px solid black;
+        -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+        mask-image: -webkit-radial-gradient(circle, white, black);
+      }
+      .switch label:before,
+      .switch label:after{
+        content: "";
+        position: absolute;
+        left: -50%;
+        width: 200%;
+        height: 12px;
+        background-color: #1F2736;
+      background-image: -webkit-gradient(linear, 0 100%, 0 0, color-stop(0.2, transparent), color-stop(0.2, rgba(255,255,255,0.35)));
+      background-image: -webkit-linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.35) 20%);
+      background-image: -moz-linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.35) 20%);
+      background-image: -o-linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.35) 20%);
+      background-image: linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.35) 20%);
+      background-size: 20px 20px;
+      -webkit-transition: -webkit-transform .5s ease-in-out;
+      transition: transform .5s ease-in-out;
+      }
+      .switch label:before{
+        top:-5px;
+        -webkit-transform: rotate(10deg) skewY(-5deg);
+        box-shadow:inset 0 -3px 6px rgba(0,0,0,0.75);
+        border-radius: 30px 30px 0 0;
+      }
+      .switch label:after{
+        bottom: -5px;
+        -webkit-transform: rotate(-10deg) skewY(5deg);
+        box-shadow:inset 0 3px 6px rgba(0,0,0,0.75);
+        border-radius: 0 0 30px 30px;
+      }
+      .switch input:checked ~ label:before{
+        -webkit-transform: rotate(-10deg) skewY(5deg);
+      }
+      .switch input:checked ~ label:after{
+        -webkit-transform: rotate(10deg) skewY(-5deg);
+      }
+      .switch input ~ label i {
+          display: block;
+          height: 51px;
+          width: 51px;
+          position: absolute;
+          left: 2px;
+          top: 2px;
+          z-index: 2;
+          border-radius: inherit;
+          background: #283446; Fallback 
+          background: linear-gradient(#36455b, #283446);
+          box-shadow:
+              inset 0 1px 0 rgba(255,255,255,0.2),
+              0 0 8px rgba(0,0,0,0.3),
+           inset 0px 1px 1px green;
+        -webkit-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+      }
+      .switch input:checked ~ label i {
+          left: auto;
+          left: 65%;
+        box-shadow:
+              inset 0 1px 0 rgba(255,255,255,0.2),
+              0 0 8px rgba(0,0,0,0.3),
+              0 8px 8px rgba(0,0,0,0.3),
+           inset 0 1px 1px rgba(255, 0, 0, 0.3);
+        -webkit-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+      }
+      label i:before{
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 30px;
+        background: rgba(0,0,0,0.85);
+        display: block;
+        left: 17px;
+        top: 20%;
+        box-shadow: 1px 0 0 rgba(255,255,255,0.15),
+                    7px 0 0 rgba(0,0,0,0.85),
+                    8px 0 0 rgba(255,255,255,0.15),
+                    14px 0 0 rgba(0,0,0,0.85),
+                    15px 0 0 rgba(255,255,255,0.15);
+      }
+      label i:after{
+        content: "";
+        height: 51px;
+        width:51px;
+        border-radius:30px;
+        position: absolute;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.75);
+
+      }
+      .switch span.led{
+        display: inline-block;
+        position: absolute;
+        top: -40px;
+        width: 18px;
+        height: 18px;
+        border-radius: 10px;
+         background: gradient-gradient(#36455b, #283446);
+         box-shadow:
+                inset 0 1px 0 rgba(0,0,0,0.2),
+                0 1px 0 rgba(255,255,255,0.1),
+                0 0 30px rgba(185,231,253,0),
+                  inset 0 0 8px rgba(0,0,0,0.9),
+                  inset 0 -2px 5px rgba(0,0,0,0.3),
+                  inset 0 -5px 5px rgba(0,0,0,0.5);
+         -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+        z-index: 2;
+      }
+      .switch span.led:after {
+        background: rgba(255, 255, 255, 0.10);
+        content: "";
+        position: absolute;
+        height: 5px;
+        width: 10px;
+        border-radius: 100% 100% 20% 20%;
+        left: 22%;
+        top: 15%;
+      }
+
+      .switch span.led:before{
+        top:-25px;
+        position: absolute;
+        color: grey;
+      }
+      .switch input:checked ~ span.led.off:before{color: grey;}
+      .switch span.led.on{right: 5px;background: #45272c;}
+      .switch span.led.on:before{content: "off";}
+      .switch span.led.off{left: 5px;background: #27452c;}
+      .switch span.led.off:before{content: "on";}
+      .switch input:checked ~ span.led.on:before{color: white;}
+      .switch input ~ span.led.off:before{color: white;}
+      .switch input ~ span.led.off {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border-radius: 10px;
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+        z-index: 2;
+        background: #baffbc;
+         background: gradient-gradient(#ffffff, #7dba77);
+         box-shadow:
+                inset 0 1px 0 rgba(0,0,0,0.1),
+                0 1px 0 rgba(255,255,255,0.1),
+                0 0 30px rgba(62,248,77,1),
+                inset 0 0 8px rgba(62,248,77,0.8),
+                  inset 0 -2px 5px rgba(184,253,185,0.3),
+                  inset 0 -3px 8px rgba(184,253,185,0.5);
+       }
+       .switch input:checked ~ span.led.on{
+        background: #FF5669;
+        background: gradient-gradient(#ff0000, #ba777b);
+        box-shadow:
+                  inset 0 1px 0 rgba(0,0,0,0.1),
+                  0 1px 0 rgba(255,255,255,0.1),
+                  0 0 30px rgba(255, 0, 38, 1),
+                  inset 0 0 8px rgba(255, 8, 61, 0.8),
+                  inset 0 -2px 5px rgba(253, 184, 199, 0.6),
+                  inset 0 -3px 8px rgba(253, 184, 195, 0.5);
+       }
+      .switch input:checked ~ span.led.off{
+        background: #283446;
+        background: gradient-gradient(#36455b, #283446);
+        box-shadow:
+            inset 0 1px 0 rgba(0,0,0,0.2),
+            0 1px 0 rgba(255,255,255,0.1),
+            0 0 30px rgba(185,231,253,0),
+        inset 0 0 8px rgba(0,0,0,0.9),
+        inset 0 -2px 5px rgba(0,0,0,0.3),
+        inset 0 -5px 5px rgba(0,0,0,0.5);
+        }
+       .switch input:checked ~ span.led.on:after{display:none;} */
+    </style>
+
+    <script>
+      window.console = window.console || function (t) {};
+    </script>
+
+    <script></script>
+  </head>
+
+  <body translate="no">
+    <div class="toggle-wrapper">
+      <div class="rect_2"></div>
+      <div class="rect_1">
+        <div class="rect_1__inset"></div>
+      </div>
+      <div class="rect_3"></div>
+      <div class="toggle_handler">
+        <div class="toggle__ellips"></div>
+      </div>
+    </div>
+
+    <div class="switch">
+      <input type="checkbox" name="toggle" />
+      <label for="toggle"><i></i></label>
+      <span class="led off"></span>
+      <span class="led on"></span>
+    </div>
+
+    <div class="container">
+  <button class="button" active><span class="text">Click me<span></button>
+  <button class="toggle"><span class="toggleText">Off</span><div aria-hidden="true" class="switchArea"><div class="switch"><div class="lines"></div></div></div></button>
+</div>
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+
+    <script id="rendered-js">
+      var toggleWrapper = document.querySelector(".toggle-wrapper");
+
+      document
+        .querySelector(".toggle_handler")
+        .addEventListener("click", () => {
+          toggleWrapper.classList.toggle("pushed");
+        });
+      //# sourceURL=pen.js
+    </script>
+  </body>
+</html>
