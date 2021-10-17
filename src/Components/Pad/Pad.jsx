@@ -1,20 +1,27 @@
 import "./Pad.scss";
 import { useContext } from "react";
 import { Contex } from "../../Store";
+ 
 
-function Pad(props) {
-
+function DrumPad(props) {
   const [state, dispatch] = useContext(Contex);
 
   const playSound = (key) => {
+
+    if (key) {
+      var sound = document.getElementById(key.keyTrigger);
+      sound.play();
+      // sound.volume = state.volume;
+    }
+
     dispatch({
       type: "SET_KEY",
       payload: key,
     });
     dispatch({
       type: "SET_DISPLAY",
-      payload: key.id
-    })
+      payload: key.id,
+    });
   };
 
   return (
@@ -24,6 +31,7 @@ function Pad(props) {
             <div
               key={index}
               className="drum-pad"
+              id={index}
               onClick={() => playSound(data)}
             >
               {data.keyTrigger}
@@ -39,4 +47,4 @@ function Pad(props) {
   );
 }
 
-export default Pad;
+export default DrumPad;

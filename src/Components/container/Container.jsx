@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Container.scss";
-import Pad from "../Pad/Pad";
+import DrumPad from "../Pad/Pad";
 import Display from "../Display/Display";
 import DATA from "../../Data.json";
 import { Contex } from "../../Store";
@@ -92,7 +92,7 @@ function Container() {
         </div>
       </div>
       <div className="pad-wrap">
-        <Pad bank={bank} />
+        <DrumPad bank={bank} />
       </div>
       <div className="volums">
         <input
