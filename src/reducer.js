@@ -8,7 +8,7 @@ const Reducer = (state, action) => {
     case "SET_KEY":
       return {
         ...state,
-        key: action.payload,
+        keyPressed: action.payload,
       };
     case "TURN_ON_OFF":
       return {

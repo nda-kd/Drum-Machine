@@ -3,7 +3,7 @@ import Reducer from "./reducer";
 
 const initState = {
   display: "",
-  key: {},
+  keyPressed: false ,
   switchIsOn: true,
   volume: 50,
 };

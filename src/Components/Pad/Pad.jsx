@@ -1,17 +1,19 @@
 import "./Pad.scss";
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Contex } from "../../Store";
- 
 
 function DrumPad(props) {
   const [state, dispatch] = useContext(Contex);
+  // const [duration, setDuration] = useState(0);
 
   const playSound = (key) => {
-
     if (key) {
       var sound = document.getElementById(key.keyTrigger);
+      // console.log(sound.duration);
+    }
+
+    if (state.switchIsOn) {
       sound.play();
-      // sound.volume = state.volume;
     }
 
     dispatch({
@@ -23,6 +25,15 @@ function DrumPad(props) {
       payload: key.id,
     });
   };
+
+  useEffect(() => {
+    let audios = document.querySelectorAll(".clip");
+    for (let i = 0; i < audios.length; i++) {
+      audios[i].volume = parseInt(state.volume) / 100;
+    }
+    // document.getElementsByTagName("audio").volume =
+    //   parseInt(state.volume) / 100;
+  }, [state.volume]);
 
   return (
     <div className="pad">
@@ -37,6 +48,7 @@ function DrumPad(props) {
               {data.keyTrigger}
               <audio
                 src={data.url}
+                volume={state.volume}
                 id={data.keyTrigger}
                 className="clip"
               ></audio>
