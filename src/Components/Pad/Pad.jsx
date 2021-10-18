@@ -9,7 +9,6 @@ function DrumPad(props) {
   const playSound = (key) => {
     if (key) {
       var sound = document.getElementById(key.keyTrigger);
-      // console.log(sound.duration);
     }
 
     if (state.switchIsOn) {
@@ -33,6 +32,29 @@ function DrumPad(props) {
     }
   }, [state.volume]);
 
+  const handleKeyPress = (e) => {
+    if (state.switchIsOn) {
+      if (document.getElementById(e.key.toUpperCase())) {
+        document.getElementById(e.key.toUpperCase()).parentElement.click();
+        document
+          .getElementById(e.key.toUpperCase())
+          .parentElement.classList.add("keyClick");
+        setTimeout(() => {
+          document
+            .getElementById(e.key.toUpperCase())
+            .parentElement.classList.remove("keyClick");
+        }, 300);
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
+
   return (
     <div className="pad">
       {props.bank
@@ -40,16 +62,16 @@ function DrumPad(props) {
             <div
               key={index}
               className={`drum-pad ${state.switchIsOn ? "click" : ""}`}
-              id={index}
+              id={data.id}
               onClick={() => playSound(data)}
             >
-              {data.keyTrigger}
               <audio
                 src={data.url}
                 volume={state.volume}
                 id={data.keyTrigger}
                 className="clip"
               ></audio>
+              {data.keyTrigger}
             </div>
           ))
         : ""}

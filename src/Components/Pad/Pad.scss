@@ -36,7 +36,7 @@
     // transition: 5s ease-in-out;
   }
 
-  .click:active {
+  .click:active , .keyClick {
     background: rgb(206, 241, 246);
     background: radial-gradient(
       circle,
