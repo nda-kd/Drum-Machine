@@ -9,6 +9,18 @@
   box-shadow: rgba(133, 133, 134, 0.4) 0px 0px 0px 2px,
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  @media screen and (max-width: 800px) {
+    position: relative;
+    left: 0;
+    width: 250px;
+    height: 60px;
+    top: -12px;
+  }
+
+  @media screen and (max-height: 600px) and (max-width: 800px) {
+    top: 10px !important;
+    left: 12px;
+  }
 
   #display {
     display: flex;
@@ -35,5 +47,12 @@
     color: rgb(37, 37, 37);
     font-size: 22px;
     // font-weight: bold;
+    @media screen and (max-width: 800px) {
+      position: relative;
+      left: 3%;
+      top: 6%;
+      width: 200px;
+      height: 35px;
+    }
   }
 }

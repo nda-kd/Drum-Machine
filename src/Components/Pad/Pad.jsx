@@ -31,8 +31,6 @@ function DrumPad(props) {
     for (let i = 0; i < audios.length; i++) {
       audios[i].volume = parseInt(state.volume) / 100;
     }
-    // document.getElementsByTagName("audio").volume =
-    //   parseInt(state.volume) / 100;
   }, [state.volume]);
 
   return (
@@ -41,7 +39,7 @@ function DrumPad(props) {
         ? props.bank.map((data, index) => (
             <div
               key={index}
-              className="drum-pad"
+              className={`drum-pad ${state.switchIsOn ? "click" : ""}`}
               id={index}
               onClick={() => playSound(data)}
             >
