@@ -33,27 +33,30 @@ function DrumPad(props) {
   }, [state.volume]);
 
   const handleKeyPress = (e) => {
-    if (state.switchIsOn) {
-      if (document.getElementById(e.key.toUpperCase())) {
-        document.getElementById(e.key.toUpperCase()).parentElement.click();
+    if (state.switchIsOn && document.getElementById(e.key.toUpperCase())) {
+      document.getElementById(e.key.toUpperCase()).parentElement.click();
+      document
+        .getElementById(e.key.toUpperCase())
+        .parentElement.classList.add("keyClick");
+      setTimeout(() => {
         document
           .getElementById(e.key.toUpperCase())
-          .parentElement.classList.add("keyClick");
-        setTimeout(() => {
-          document
-            .getElementById(e.key.toUpperCase())
-            .parentElement.classList.remove("keyClick");
-        }, 300);
-      }
+          .parentElement.classList.remove("keyClick");
+      }, 300);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
+    if (state.switchIsOn) {
+      document.addEventListener("keydown", handleKeyPress);
+    } else {
+      document.removeEventListener("keydown", handleKeyPress);
+    }
+
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, []);
+  }, [state.switchIsOn]);
 
   return (
     <div className="pad">
